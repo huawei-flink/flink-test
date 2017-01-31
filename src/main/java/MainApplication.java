@@ -26,7 +26,7 @@ public class MainApplication {
 		
 		try {
 			BufferedReader queryFile = new BufferedReader(
-					new FileReader("queryIn"));
+					new FileReader("/home/rtudoran/git/flink-test/src/main/resources/queryIn"));
 			sqlquery = queryFile.readLine();
 			queryFile.close();
 		} catch (IOException e) {
@@ -57,15 +57,15 @@ public class MainApplication {
 		
 		tableEnvironment.registerDataStream(
 				"inputStream",
-				inputStr, "timestamp,id,name,note,specificnumber,amount");
+				inputStr, "timeevent,id,name,note,specificnumber,amount");
 		
 		Table result = tableEnvironment.sql(sqlquery);
 		
 		//we expect that the output will be 2 fields timestamp and double
-		TypeInformation<Tuple2<java.sql.Timestamp, Double>> tpinf = new TypeHint<Tuple2<java.sql.Timestamp, Double>>() {
+		TypeInformation<Tuple2<Long, Double>> tpinf = new TypeHint<Tuple2<Long, Double>>() {
 		}.getTypeInfo();
 		
-		DataStream<Tuple2<java.sql.Timestamp, Double>> saa = tableEnvironment.toDataStream(result, tpinf);
+		DataStream<Tuple2<Long, Double>> saa = tableEnvironment.toDataStream(result, tpinf);
 
 		saa.print();
 

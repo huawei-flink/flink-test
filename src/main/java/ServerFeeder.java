@@ -71,20 +71,20 @@ public class ServerFeeder implements Runnable{
 			     if(line.equals("exit"))
 			    	 break;			    
 			     
-			     if(!line.contains("-f0"))
+			     if(line.contains("-f0"))
 			    	 timestamp = Long.parseLong(line.split(" ")[1]);
 			     else
 			    	 timestamp +=7200000;
 			     
-			     if(!line.contains("-f1"))
+			     if(line.contains("-f1"))
 			    	 id = Integer.parseInt(line.split(" ")[1]);
-			     if(!line.contains("-f2"))
+			     if(line.contains("-f2"))
 			    	 user = line.split(" ")[1];
-			     if(!line.contains("-f3"))
+			     if(line.contains("-f3"))
 			    	 note = line.split(" ")[1];
-			     if(!line.contains("-f4"))
+			     if(line.contains("-f4"))
 			    	 specificNumber = Long.parseLong(line.split(" ")[1]);
-			     if(!line.contains("-f5"))
+			     if(line.contains("-f5"))
 			    	 amount = Double.parseDouble(line.split(" ")[1]);
 			     
 			     message = timestamp+","+id+","+user+","+note+","+specificNumber+","+amount;
